@@ -2,7 +2,6 @@
   "name": "sc-shell",
   "version": "0.0.1",
   "description": "Software Carpentry instructor shell",
-  "main": "index.js",
   "directories": {
     "test": "test"
   },
@@ -21,6 +20,10 @@
   ],
   "author": "Carlos Martinez",
   "license": "ISC",
+  "preferGlobal": true,
+  "bin": {
+    "scshell": "index.js"
+  },
   "bugs": {
     "url": "https://github.com/c-martinez/sc-shell/issues"
   },
