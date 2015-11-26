@@ -1,0 +1,28 @@
+{
+  "name": "sc-shell",
+  "version": "0.0.1",
+  "description": "Software Carpentry instructor shell",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/c-martinez/sc-shell.git"
+  },
+  "keywords": [
+    "Software",
+    "Carpentry",
+    "Shell",
+    "logging"
+  ],
+  "author": "Carlos Martinez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/c-martinez/sc-shell/issues"
+  },
+  "homepage": "https://github.com/c-martinez/sc-shell#readme"
+}
