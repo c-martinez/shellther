@@ -31,7 +31,7 @@ function triggerTimer() {
 
 // This action gets executed on exit
 function exitAction() {
-  conunsole.log('Your EXIT callback could be called here');
+  console.log('Your EXIT callback could be called here');
 }
 
 // This action gets executed after N seconds of inactivity
