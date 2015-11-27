@@ -48,7 +48,7 @@ Script done, file is shellLog.txt
 
 This will update the content of your back end repository. For example, the following is the result using the Etherpad engine:
 
-![etherpad example][images/etherpad.png]
+![etherpad example](./images/etherpad.png)
 
 ## TODO's
  - Add more engines
