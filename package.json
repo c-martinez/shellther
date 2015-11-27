@@ -13,9 +13,8 @@
     "url": "git+https://github.com/c-martinez/sc-shell.git"
   },
   "keywords": [
-    "Software",
-    "Carpentry",
-    "Shell",
+    "Software Carpentry",
+    "shell",
     "logging"
   ],
   "author": "Carlos Martinez",
