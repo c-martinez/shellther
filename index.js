@@ -1,9 +1,9 @@
 #! /usr/bin/env node
 
-var spawn = require('child_process').spawn;
-var fs    = require('fs');
-
-var engine = require('./lib/dummy');
+var spawn  = require('child_process').spawn;
+var fs     = require('fs');
+var config = require('./config');
+var engine = require('./lib/' + config.engine);
 
 // Taken from: https://groups.google.com/forum/#!topic/nodejs/b9JdFrJQqn0
 function shell(cmd, opts, callback) {
@@ -16,8 +16,9 @@ function shell(cmd, opts, callback) {
   child.on('exit', function() {
     process.stdin.setRawMode(true);
     process.stdin.resume();
-    engine.exitAction();
-    process.exit();
+    engine.exitAction(function() {
+      process.exit();
+    });
   });
 
   return child;
@@ -36,12 +37,14 @@ function triggerTimer() {
 var userArgs = process.argv.slice(2);
 var savefile = userArgs[0];
 
-if(savefile == undefined) {
+if (savefile === undefined) {
   savefile = 'somefile.txt';
 }
+
+config.savefile = savefile;
+engine.setup(config);
 
 var timeout = 5;  // in seconds
 
 shell('script', ['-f', savefile]);
 fs.watch(savefile, triggerTimer);
-

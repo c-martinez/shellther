@@ -27,5 +27,8 @@
   "bugs": {
     "url": "https://github.com/c-martinez/sc-shell/issues"
   },
-  "homepage": "https://github.com/c-martinez/sc-shell#readme"
+  "homepage": "https://github.com/c-martinez/sc-shell#readme",
+  "dependencies": {
+    "etherpad-lite-client": "^0.7.0"
+  }
 }
