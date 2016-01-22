@@ -1,6 +1,8 @@
 import abc
 import threading
 
+# TODO: document
+
 class BaseEngine(object):
     __metaclass__  = abc.ABCMeta
     _running = False

@@ -1,6 +1,9 @@
 import os
+import sys
 
-from engines import DummyEngine
+from engines import EtherpadFullEngine, EtherpadSectionEngine
+
+# TODO: Add docopt documentation
 
 def runCommand(cmd):
     '''Run given command interactively. Return command exit code.
@@ -11,19 +14,23 @@ def runCommand(cmd):
         sys.stderr.write('{0}: command not found\n'.format(cmd[0]))
     return code
 
-#print 'TODO: '
-#print ' - Start listener'
-#print ' - Start script command'
-#print ' - Push output of script command'
-# runCommand('/bin/bash')
-
-def doStuff(engine):
+def recordConsole(engine, logfile):
     engine.start()
-    # runCommand('/bin/bash')
-    runCommand('pwd')
+    # TODO: post-process logfile to remove back lines and etc.
+    runCommand('script -f ' + logfile)
     engine.stop()
 
-engine = DummyEngine()
-doStuff(engine)
+# TODO: Read these parameters from config file or docopt
+apikey = 'e792c32e44952f8d24c2cabe35bf36a12003d04726d3579c36f5a1d00569c81c'
+base_url = 'http://localhost:9001/api'
+padID = 'test'
+marker = None
+logfile = 'logfile.txt'
+doSection = True
 
-print 'Finished main script'
+if doSection:
+    engine = EtherpadSectionEngine(apikey, padID, targetFile=logfile, marker=marker, base_url=base_url)
+else:
+    engine = EtherpadFullEngine(apikey, padID, targetFile=logfile, base_url=base_url)
+
+recordConsole(engine, logfile)
