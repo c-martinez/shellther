@@ -35,7 +35,7 @@ class EtherpadSectionEngine(BaseEngine):
         self._con.setText(padID=self._padID, text=newText)
 
     def exitAction(self):
-        print '''Do exit action at the end.'''
+        pass
 
 # from https://stackoverflow.com/questions/2257441/random-string-generation-with-upper-case-letters-and-digits-in-python
 def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
