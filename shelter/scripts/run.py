@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 """Shelter. Log your terminal and sync it with Etherpad (or other repository).
 
 Usage:
@@ -16,6 +15,6 @@ from docopt import docopt
 
 from shelter.main import parseArgs
 
-if __name__=='__main__':
+def main():
     args = docopt(__doc__, version='Shelter v0.1')
     parseArgs(args)
