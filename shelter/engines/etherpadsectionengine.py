@@ -1,6 +1,7 @@
 from baseengine import BaseEngine
 
 from etherpad_lite import EtherpadLiteClient
+from shelllogger import sanitize
 
 import string
 import random
@@ -24,6 +25,7 @@ class EtherpadSectionEngine(BaseEngine):
     def timedAction(self):
         with open(self._file, 'r') as fin:
             fileText = fin.read()
+        fileText = sanitize(fileText)
         pad = self._con.getText(padID=self._padID)
         text = pad['text']
         parts = text.split(self._lineMarker)

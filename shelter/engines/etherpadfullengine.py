@@ -1,6 +1,7 @@
 from baseengine import BaseEngine
 
 from etherpad_lite import EtherpadLiteClient
+from shelllogger import sanitize
 
 # TODO: document
 
@@ -13,6 +14,7 @@ class EtherpadFullEngine(BaseEngine):
     def timedAction(self):
         with open(self._file, 'r') as fin:
             newText = fin.read()
+        newText = sanitize(newText)
         self._con.setText(padID=self._padID, text=newText)
 
     def exitAction(self):

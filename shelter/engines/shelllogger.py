@@ -562,5 +562,3 @@ def sanitize_file(infilename, outfilename):
     fout = codecs.open(outfilename, encoding="utf-8", mode="w")
     for line in codecs.open(infilename, encoding="utf-8"):
         fout.write(sanitize(line))
-
-print "Reached the end of the script -- where is the entry point?"

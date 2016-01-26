@@ -1,42 +1,25 @@
 """Shelter. Log your terminal and sync it with Etherpad (or other repository).
 
 Usage:
-  main.py <logfile> <padID> [--full | --section [--marker=<m>]]
+  main.py <padID> [--config <configfile>] --dedicated
+  main.py <padID> [--config <configfile>] --section [--marker <marker>]
 
 Options:
   -h --help     Show this screen.
-  --marker=<m>  Marker used as separator. If None, random marker is generated [default: None].
+  --dedicated   Use dedicated Etherpad to log console
+  --section     Use a section in the Etherpad to log console
+  --config <configfile>  Load configuration from config file (default: .config).
+  --marker <marker>  Marker used as separator. If None, random marker is generated (default: random).
 """
-# logfile = 'logfile.txt'
-# padID = 'test'
-
-# marker = None
-# doSection = False
-
-# apikey = '2dd4c81386f54847e329fcfd6705314c410804cd1605d03d09d100f291f51acb'
-# base_url = 'http://localhost:9001/api'
-
-#  naval_fate.py ship <name> move <x> <y> [--speed=<kn>]
-#  naval_fate.py ship shoot <x> <y>
-#  naval_fate.py mine (set|remove) <x> <y> [--moored | --drifting]
-#  naval_fate.py (-h | --help)
-#  naval_fate.py --version
-
-
-
-
-
-
-
-
 
 import os
 import sys
+
 from docopt import docopt
+from ConfigParser import SafeConfigParser
+from tempfile import NamedTemporaryFile
 
 from engines import EtherpadFullEngine, EtherpadSectionEngine
-
-# TODO: Add docopt documentation
 
 def runCommand(cmd):
     '''Run given command interactively. Return command exit code.'''
@@ -48,27 +31,34 @@ def runCommand(cmd):
 
 def recordConsole(engine, logfile):
     engine.start()
-    # TODO: post-process logfile to remove back lines and etc.
-    # runCommand('bash dostuff.sh')
     runCommand('script -f ' + logfile)
     engine.stop()
 
-def doMain(apikey, padID, marker, base_url, logfile, doSection):
+def doMain(apikey, padID, marker, baseurl, logfile, doSection):
     if doSection:
-        engine = EtherpadSectionEngine(apikey, padID, targetFile=logfile, marker=marker, base_url=base_url)
+        engine = EtherpadSectionEngine(apikey, padID, targetFile=logfile, marker=marker, base_url=baseurl)
     else:
-        engine = EtherpadFullEngine(apikey, padID, targetFile=logfile, base_url=base_url)
+        engine = EtherpadFullEngine(apikey, padID, targetFile=logfile, base_url=baseurl)
     recordConsole(engine, logfile)
 
-# TODO: Read these parameters from config file or docopt
-# apikey = '2dd4c81386f54847e329fcfd6705314c410804cd1605d03d09d100f291f51acb'
-# base_url = 'http://localhost:9001/api'
-# padID = 'test'
-# marker = None
-# logfile = 'logfile.txt'
-# doSection = False
+if __name__=='__main__':
+    args = docopt(__doc__, version='Shelter v0.1')
 
-arguments = docopt(__doc__, version='Shelter v0.1')
-print arguments
-# print (apikey, padID, marker, base_url, logfile, doSection)
-# doMain(apikey, padID, marker, base_url, logfile, doSection)
+    logfile = NamedTemporaryFile(delete=True).name
+    print 'Using temp file: ',logfile
+    padID = args['<padID>']
+    doSection = args['--section']
+    marker = args['--marker']
+
+    defaultConfig = {
+            'apikey'  : 'no-api-key',
+            'baseurl': 'http://localhost:9001/api'
+        }
+    config = SafeConfigParser(defaultConfig)
+    config.add_section('shelter')
+    if args['--config']:
+        config.read(args['--config'])
+    apikey = config.get('shelter', 'apikey')
+    baseurl = config.get('shelter', 'baseurl')
+
+    doMain(apikey, padID, marker, baseurl, logfile, doSection)
