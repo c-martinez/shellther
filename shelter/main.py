@@ -2,6 +2,8 @@ import os
 import sys
 
 from engines import EtherpadFullEngine, EtherpadSectionEngine
+from tempfile import NamedTemporaryFile
+from ConfigParser import SafeConfigParser
 
 def runCommand(cmd):
     '''Run given command interactively. Return command exit code.'''
