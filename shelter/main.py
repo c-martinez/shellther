@@ -13,9 +13,22 @@ def runCommand(cmd):
         sys.stderr.write('{0}: command not found\n'.format(cmd[0]))
     return code
 
+def buildCommandLine(logfile):
+    platform = sys.platform
+    if platform == "linux" or platform == "linux2":
+        return 'script -f ' + logfile
+    elif _platform == "darwin":
+        return 'script -t 0 ' + logfile
+    elif _platform == "win32":
+        sys.stderr.write('Windows is not currently supported. Sorry!')
+        sys.exit()
+    else:
+        sys.stderr.write('Unknown platform. Don\'t know what to do. Bye!')
+        sys.exit()
+
 def recordConsole(engine, logfile):
     engine.start()
-    runCommand('script -f ' + logfile)
+    runCommand(buildCommandLine(logfile))
     engine.stop()
 
 def parseArgs(args):
