@@ -17,9 +17,9 @@ def buildCommandLine(logfile):
     platform = sys.platform
     if platform == "linux" or platform == "linux2":
         return 'script -f ' + logfile
-    elif _platform == "darwin":
+    elif platform == "darwin":
         return 'script -t 0 ' + logfile
-    elif _platform == "win32":
+    elif platform == "win32":
         sys.stderr.write('Windows is not currently supported. Sorry!')
         sys.exit()
     else:
