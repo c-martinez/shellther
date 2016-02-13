@@ -1,8 +1,8 @@
-"""Shelter. Log your terminal and sync it with Etherpad (or other repository).
+"""Shellther. Log your shell and sync it with Etherpad (or other repository).
 
 Usage:
-  shelter <padID> [--config <configfile>] --dedicated
-  shelter <padID> [--config <configfile>] --section [--marker <marker>]
+  shellther <padID> [--config <configfile>] --dedicated
+  shellther <padID> [--config <configfile>] --section [--marker <marker>]
 
 Options:
   -h --help     Show this screen.
@@ -13,8 +13,8 @@ Options:
 """
 from docopt import docopt
 
-from shelter.main import parseArgs
+from shellther.main import parseArgs
 
 def main():
-    args = docopt(__doc__, version='Shelter v0.1')
+    args = docopt(__doc__, version='Shellther v0.1')
     parseArgs(args)
