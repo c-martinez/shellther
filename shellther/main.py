@@ -43,11 +43,11 @@ def parseArgs(args):
             'baseurl': 'http://localhost:9001/api'
         }
     config = SafeConfigParser(defaultConfig)
-    config.add_section('shelter')
+    config.add_section('shellther')
     if args['--config']:
         config.read(args['--config'])
-    apikey = config.get('shelter', 'apikey')
-    baseurl = config.get('shelter', 'baseurl')
+    apikey = config.get('shellther', 'apikey')
+    baseurl = config.get('shellther', 'baseurl')
 
     doMain(apikey, padID, marker, baseurl, logfile, doSection)
 

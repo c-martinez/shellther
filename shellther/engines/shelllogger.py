@@ -1,6 +1,6 @@
 """
 DISCLAIMER:
-This code is not part of shelter. It is found here:
+This code is not part of shellther. It is found here:
     http://pydoc.net/Python/shelllogger/1.0.1/sl.shelllogger/
 However, it does not seem to have any way of installing as a package, so it has
 been repackaged here.
