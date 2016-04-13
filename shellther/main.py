@@ -1,9 +1,13 @@
 import os
 import sys
 
-from engines import EtherpadFullEngine, EtherpadSectionEngine
+from .engines import EtherpadFullEngine, EtherpadSectionEngine
 from tempfile import NamedTemporaryFile
-from ConfigParser import SafeConfigParser
+try:
+    from ConfigParser import SafeConfigParser
+except:
+    from six.moves.configparser import SafeConfigParser
+
 
 def runCommand(cmd):
     '''Run given command interactively. Return command exit code.'''
@@ -33,7 +37,7 @@ def recordConsole(engine, logfile):
 
 def parseArgs(args):
     logfile = NamedTemporaryFile(delete=True).name
-    print 'Using temp file: ',logfile
+    print('Using temp file: ',logfile)
     padID = args['<padID>']
     doSection = args['--section']
     marker = args['--marker']

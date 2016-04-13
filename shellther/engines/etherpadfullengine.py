@@ -1,7 +1,7 @@
-from baseengine import BaseEngine
+from .baseengine import BaseEngine
 
 from etherpad_lite import EtherpadLiteClient
-from shelllogger import sanitize
+from .shellloggerExtract import sanitize
 
 # TODO: document
 
