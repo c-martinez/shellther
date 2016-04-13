@@ -36,15 +36,13 @@ def recordConsole(engine, logfile):
     engine.stop()
 
 def parseArgs(args):
-    logfile = NamedTemporaryFile(delete=True).name
-    print('Using temp file: ',logfile)
     padID = args['<padID>']
     doSection = args['--section']
     marker = args['--marker']
 
     defaultConfig = {
-            'apikey'  : 'no-api-key',
-            'baseurl': 'http://localhost:9001/api'
+            'apikey' : '',     # Content of etherpad's APIKEY.txt
+            'baseurl': ''      # Something like http://localhost:9001/api
         }
     config = SafeConfigParser(defaultConfig)
     config.add_section('shellther')
@@ -53,6 +51,16 @@ def parseArgs(args):
     apikey = config.get('shellther', 'apikey')
     baseurl = config.get('shellther', 'baseurl')
 
+    # Validate config files
+    if apikey=='':
+        print('Cannot work without an API key!')
+        sys.exit()
+    if baseurl=='':
+        print('Need a valid URL!')
+        sys.exit()
+
+    logfile = NamedTemporaryFile(delete=True).name
+    print('Using temp file: ',logfile)
     doMain(apikey, padID, marker, baseurl, logfile, doSection)
 
 
